@@ -1,6 +1,7 @@
 package com.example.demo_movie.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,15 +58,30 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
-	public MovieRes findMovieByMovieName(MovieReq movieReq) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Movie> findMovieByMovieName(String movieName) {
+		List<Movie> resList = new ArrayList<>();
+		List<Movie> movieList = movieDao.findMovieByMovieName(movieName);
+
+		//判斷是否為空的
+		if (movieList.isEmpty()) {
+			return null;
+		}
+		
+		//列出該電影的所有詳細資料	
+		for (Movie movie : movieList) {
+			resList.add(movie);
+		}
+		return resList;
 	}
 
 	@Override
-	public MovieRes findMovieByType(MovieReq movieReq) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Movie> findMovieByType(String type) {
+		List<Movie> movieList = movieDao.findMovieByType(type);
+		
+		if (movieList.isEmpty()) {
+			return null;
+		}
+		return movieList;
 	}
 
 	@Override

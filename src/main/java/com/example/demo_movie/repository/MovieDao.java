@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 import com.example.demo_movie.entity.Movie;
 
 @Repository
-public interface MovieDao extends JpaRepository<Movie, String>{
+public interface MovieDao extends JpaRepository<Movie, String> {
 
 	public List<Movie> findMovieByMovieName(String movieName);
-	
+
 	public List<Movie> findMovieByType(String type);
 
 }

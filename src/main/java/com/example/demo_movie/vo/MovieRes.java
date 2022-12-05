@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.example.demo_movie.entity.Customers;
 import com.example.demo_movie.entity.Movie;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude(JsonInclude.Include.NON_EMPTY)	
 public class MovieRes {
 
 	private Movie movie;
@@ -13,7 +15,9 @@ public class MovieRes {
 
 	private String message;
 	
-	List<Customers> orderList;
+	private List<Customers> orderList;
+	
+	private List<Movie> movieList;
 
 	public MovieRes() {
 
@@ -35,6 +39,11 @@ public class MovieRes {
 	
 	public MovieRes(List<Customers> orderList, String message) {
 		this.orderList = orderList;
+		this.message = message;
+	}
+	
+	public MovieRes(String message, List<Movie> movieList) {
+		this.movieList = movieList;
 		this.message = message;
 	}
 
@@ -68,6 +77,14 @@ public class MovieRes {
 
 	public void setOrderList(List<Customers> orderList) {
 		this.orderList = orderList;
+	}
+
+	public List<Movie> getMovieList() {
+		return movieList;
+	}
+
+	public void setMovieList(List<Movie> movieList) {
+		this.movieList = movieList;
 	}
 
 }
