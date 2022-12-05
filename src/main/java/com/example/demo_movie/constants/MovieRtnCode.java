@@ -3,9 +3,12 @@ package com.example.demo_movie.constants;
 public enum MovieRtnCode {
 
 	SUCCESSFUL("500","成功"),
-	CANNOT_NULL_OR_EMPTY("400","不能為null或空"),
+	PARAMS_ERROR("400","輸入錯誤，勿輸入0或負數且不能為null或空"),
 	MOVIE_CODE_IS_EXISTS("400","電影代碼已存在"),
-	TIME("400","格式錯誤");
+	MOVIE_NOT_EXISTS("400","電影不存在"),
+	CUSTOMER_IS_EXISTS("400","帳號已存在"),
+	TICKET_QUANTITY_ERROR("400","席位不足"),
+	ORDER_LIST_IS_EMPTY("400","查無訂單資料");
 
 	private String code;
 

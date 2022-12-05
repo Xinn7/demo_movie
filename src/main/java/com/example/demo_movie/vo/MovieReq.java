@@ -1,5 +1,6 @@
 package com.example.demo_movie.vo;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class MovieReq {
@@ -19,6 +20,18 @@ public class MovieReq {
 	private int totalTicket;
 
 	private int ticketBalance;
+	
+	private int id;
+	
+	private String customerName;
+	
+	private LocalDateTime orderDate;
+	
+	private int ticketQuantity;
+	
+	private int totalPrice;
+	
+	private boolean verify;
 	
 	public MovieReq() {
 		
@@ -86,6 +99,54 @@ public class MovieReq {
 
 	public void setTicketBalance(int ticketBalance) {
 		this.ticketBalance = ticketBalance;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public LocalDateTime getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(LocalDateTime orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	public int getTicketQuantity() {
+		return ticketQuantity;
+	}
+
+	public void setTicketQuantity(int ticketQuantity) {
+		this.ticketQuantity = ticketQuantity;
+	}
+
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public boolean isVerify() {
+		return verify;
+	}
+
+	public void setVerify(boolean verify) {
+		this.verify = verify;
 	}
 	
 }

@@ -1,6 +1,6 @@
 package com.example.demo_movie.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,27 +14,33 @@ public class Customers {
 	@Id
 	@Column(name = "id")
 	private int id;
-	
+
 	@Column(name = "customer_name")
 	private String customerName;
-	
+
 	@Column(name = "order_date")
-	private Date orderDate;
-	
+	private LocalDateTime orderDate;
+
 	@Column(name = "movie_code")
 	private String movieCode;
-	
+
 	@Column(name = "ticket_quantity")
 	private int ticketQuantity;
-	
+
 	@Column(name = "total_price")
 	private int totalPrice;
-	
+
 	@Column(name = "verify")
 	private boolean verify;
-	
+
+	public Customers(String customerName, String movieCode, int ticketQuantity) {
+		this.customerName = customerName;
+		this.movieCode = movieCode;
+		this.ticketQuantity = ticketQuantity;
+	}
+
 	public Customers() {
-		
+
 	}
 
 	public int getId() {
@@ -53,11 +59,11 @@ public class Customers {
 		this.customerName = customerName;
 	}
 
-	public Date getOrderDate() {
+	public LocalDateTime getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(LocalDateTime orderDate) {
 		this.orderDate = orderDate;
 	}
 
@@ -92,5 +98,5 @@ public class Customers {
 	public void setVerify(boolean verify) {
 		this.verify = verify;
 	}
-	
+
 }
