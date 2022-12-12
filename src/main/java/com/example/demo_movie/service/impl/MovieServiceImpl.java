@@ -57,33 +57,69 @@ public class MovieServiceImpl implements MovieService {
 		return new MovieRes(MovieRtnCode.SUCCESSFUL.getMessage());
 	}
 
+//	@Override
+//	public List<Movie> findMovieByMovieName(String movieName) {
+//		List<Movie> resList = new ArrayList<>();
+//		List<Movie> movieList = movieDao.findMovieByMovieName(movieName);
+//
+//		//判斷是否為空的
+//		if (movieList.isEmpty()) {
+//			return null;
+//		}
+//		
+//		//列出該電影的所有詳細資料	
+//		for (Movie movie : movieList) {
+//			resList.add(movie);
+//		}
+//		return resList;
+//	}
+//
+//	@Override
+//	public List<Movie> findMovieByType(String type) {
+//		List<Movie> movieList = movieDao.findMovieByType(type);
+//		
+//		if (movieList.isEmpty()) {
+//			return null;
+//		}
+//		return movieList;
+//	}
+
+	
 	@Override
-	public List<Movie> findMovieByMovieName(String movieName) {
-		List<Movie> resList = new ArrayList<>();
-		List<Movie> movieList = movieDao.findMovieByMovieName(movieName);
+	public MovieRes findMovieByMovieNameOrType(String typeOrMovieName) {
+		List<MovieRes> movieResList = new ArrayList<>();
+		MovieRes movieRes = new MovieRes();
 
-		//判斷是否為空的
-		if (movieList.isEmpty()) {
-			return null;
+		if (!movieDao.findMovieByMovieName(typeOrMovieName).isEmpty()) {
+			List<Movie> movieNameList = movieDao.findMovieByMovieName(typeOrMovieName);
+			if(movieNameList.isEmpty()) {
+				return null;
+			}
+			for (Movie movie : movieNameList) {
+				MovieRes moviesRes = new MovieRes(movie.getMovieCode(), movie.getMovieName(), movie.getDay(),
+						movie.getType(), movie.getStartTime(), movie.getPrice());
+				movieResList.add(moviesRes);
+			}
+			movieRes.setMovieList(movieNameList);
+			return movieRes;
+
+		} else if (movieDao.findMovieByType(typeOrMovieName).isEmpty()) {
+			List<Movie> movieTypeList = movieDao.findMovieByType(typeOrMovieName);
+			if(movieTypeList.isEmpty()) {
+				return null;
+			}
+			for (Movie movie : movieTypeList) {
+				MovieRes moviesRes = new MovieRes(movie.getMovieCode(), movie.getMovieName(), movie.getDay(),
+						movie.getType(), movie.getStartTime(), movie.getPrice());
+				movieResList.add(moviesRes);
+			}
+			movieRes.setMovieList(movieTypeList);
+			return movieRes;
 		}
-		
-		//列出該電影的所有詳細資料	
-		for (Movie movie : movieList) {
-			resList.add(movie);
-		}
-		return resList;
+		return movieRes;
 	}
-
-	@Override
-	public List<Movie> findMovieByType(String type) {
-		List<Movie> movieList = movieDao.findMovieByType(type);
-		
-		if (movieList.isEmpty()) {
-			return null;
-		}
-		return movieList;
-	}
-
+	
+	
 	@Override
 	public MovieRes createCustomerAndBuy(MovieReq movieReq) {
 		Optional<Customers> customerOp = customersDao.findById(movieReq.getId());
@@ -141,5 +177,6 @@ public class MovieServiceImpl implements MovieService {
 		
 		return new MovieRes(customerOrderList, MovieRtnCode.SUCCESSFUL.getMessage());
 	}
+
 
 }

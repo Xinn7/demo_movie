@@ -3,35 +3,53 @@ package com.example.demo_movie.vo;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class MovieReq {
 
+	@JsonProperty("movie_code")
 	private String movieCode;
 
+	@JsonProperty("movie_name")
 	private String movieName;
 
+	@JsonProperty("day")
 	private String day;
 
+	@JsonProperty("start_time")
 	private LocalTime startTime;
 
+	@JsonProperty("price")
 	private int price;
 
+	@JsonProperty("type")
 	private String type;
 
+	@JsonProperty("total_ticket")
 	private int totalTicket;
 
 	private int ticketBalance;
-	
+
+	@JsonProperty("id")
 	private int id;
-	
+
+	@JsonProperty("customer_name")
 	private String customerName;
-	
+
+	@JsonProperty("order_date")
 	private LocalDateTime orderDate;
-	
+
+	@JsonProperty("ticket_quantity")
 	private int ticketQuantity;
-	
+
+	@JsonProperty("total_price")
 	private int totalPrice;
-	
+
+	@JsonProperty("verify")
 	private boolean verify;
+
+	@JsonProperty("type_or_movieName")
+	private String typeOrMovieName;
 	
 	public MovieReq() {
 		
@@ -148,5 +166,14 @@ public class MovieReq {
 	public void setVerify(boolean verify) {
 		this.verify = verify;
 	}
+
+	public String getTypeOrMovieName() {
+		return typeOrMovieName;
+	}
+
+	public void setTypeOrMovieName(String typeOrMovieName) {
+		this.typeOrMovieName = typeOrMovieName;
+	}
+
 	
 }

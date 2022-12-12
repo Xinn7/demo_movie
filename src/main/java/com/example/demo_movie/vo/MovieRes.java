@@ -1,5 +1,6 @@
 package com.example.demo_movie.vo;
 
+import java.time.LocalTime;
 import java.util.List;
 
 import com.example.demo_movie.entity.Customers;
@@ -19,6 +20,23 @@ public class MovieRes {
 	
 	private List<Movie> movieList;
 
+	private MovieRes movieResList;
+	
+	private String movieName;
+
+	private String movieCode;
+
+	private String type;
+	
+	private String day;
+
+	private LocalTime startTime;
+	
+	@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+	private int price;
+	
+	private String typeOrName;
+	
 	public MovieRes() {
 
 	}
@@ -45,6 +63,21 @@ public class MovieRes {
 	public MovieRes(String message, List<Movie> movieList) {
 		this.movieList = movieList;
 		this.message = message;
+	}
+	
+	public MovieRes(MovieRes movieResList, String message) {
+		this.movieResList = movieResList;
+		this.message = message;
+	}
+	
+	public MovieRes(String movieName, String movieCode, String day, String type,  
+			LocalTime startTime, int price) {
+		this.movieName = movieName;
+		this.movieCode = movieCode;
+		this.type = type;
+		this.day = day;
+		this.startTime = startTime;
+		this.price = price;
 	}
 
 	public Movie getMovie() {
@@ -86,5 +119,71 @@ public class MovieRes {
 	public void setMovieList(List<Movie> movieList) {
 		this.movieList = movieList;
 	}
+
+	public MovieRes getMovieResList() {
+		return movieResList;
+	}
+
+	public void setMovieResList(MovieRes movieResList) {
+		this.movieResList = movieResList;
+	}
+
+	public String getMovieName() {
+		return movieName;
+	}
+
+	public void setMovieName(String movieName) {
+		this.movieName = movieName;
+	}
+
+	public String getMovieCode() {
+		return movieCode;
+	}
+
+	public void setMovieCode(String movieCode) {
+		this.movieCode = movieCode;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getDay() {
+		return day;
+	}
+
+	public void setDay(String day) {
+		this.day = day;
+	}
+
+	public LocalTime getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(LocalTime startTime) {
+		this.startTime = startTime;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public String getTypeOrName() {
+		return typeOrName;
+	}
+
+	public void setTypeOrName(String typeOrName) {
+		this.typeOrName = typeOrName;
+	}
+
+	
 
 }

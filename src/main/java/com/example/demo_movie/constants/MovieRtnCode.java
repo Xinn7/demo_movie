@@ -11,7 +11,9 @@ public enum MovieRtnCode {
 	ORDER_LIST_IS_EMPTY("400","查無訂單資料"), 
 	MOVIE_EMPTY("400", "要查詢的電影名稱不能是空的"),
 	TYPE_EMPTY("400", "要查詢的電影類型不能是空的"),
-	TYPE_EXIST("400","查詢的電影類型不存在!!")
+	TYPE_EXIST("400","查詢的電影類型不存在!!"),
+	
+
 	;
 
 	private String code;
