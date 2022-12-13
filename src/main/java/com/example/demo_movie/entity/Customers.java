@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 @Table(name = "customers")
 public class Customers {
@@ -18,6 +20,7 @@ public class Customers {
 	@Column(name = "customer_name")
 	private String customerName;
 
+	@CreationTimestamp
 	@Column(name = "order_date")
 	private LocalDateTime orderDate;
 

@@ -15,6 +15,8 @@ public interface MovieService {
 	
 	public MovieRes findMovieByType(MovieReq movieReq);
 	
+	public MovieRes findMovieByMovieNameOrType(String typeOrMovieName);
+	
 	public MovieRes createCustomerAndBuy(MovieReq movieReq);
 	
 	public MovieRes reviseCustomerAndBuy(MovieReq movieReq);
