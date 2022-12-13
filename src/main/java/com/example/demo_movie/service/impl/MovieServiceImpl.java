@@ -103,7 +103,7 @@ public class MovieServiceImpl implements MovieService {
 			movieRes.setMovieList(movieNameList);
 			return movieRes;
 
-		} else if (movieDao.findMovieByType(typeOrMovieName).isEmpty()) {
+		} else if (!movieDao.findMovieByType(typeOrMovieName).isEmpty()) {
 			List<Movie> movieTypeList = movieDao.findMovieByType(typeOrMovieName);
 			if(movieTypeList.isEmpty()) {
 				return null;
