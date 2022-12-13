@@ -62,12 +62,12 @@ public class MovieServiceImpl implements MovieService {
 //		List<Movie> resList = new ArrayList<>();
 //		List<Movie> movieList = movieDao.findMovieByMovieName(movieName);
 //
-//		//§PÂ_¬O§_¬°ªÅªº
+//		//åˆ¤æ–·æ˜¯å¦ç‚ºç©ºçš„
 //		if (movieList.isEmpty()) {
 //			return null;
 //		}
 //		
-//		//¦C¥X¸Ó¹q¼vªº©Ò¦³¸Ô²Ó¸ê®Æ	
+//		//åˆ—å‡ºè©²é›»å½±çš„æ‰€æœ‰è©³ç´°è³‡æ–™	
 //		for (Movie movie : movieList) {
 //			resList.add(movie);
 //		}
