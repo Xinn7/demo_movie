@@ -98,7 +98,7 @@ public class MovieServiceImpl implements MovieService {
 			movieRes.setMovieList(movieNameList);
 			return movieRes;
 
-		} else if (movieDao.findMovieByType(typeOrMovieName).isEmpty()) {
+		} else if (!movieDao.findMovieByType(typeOrMovieName).isEmpty()) {
 			List<Movie> movieTypeList = movieDao.findMovieByType(typeOrMovieName);
 			if(movieTypeList.isEmpty()) {
 				return null;
@@ -116,6 +116,7 @@ public class MovieServiceImpl implements MovieService {
 	
 	@Override
 	public MovieRes createCustomerAndBuy(MovieReq movieReq) {
+		// 改善沒有輸入名字也可以買 TODO
 		MovieRes res = new MovieRes();
 		if (!StringUtils.hasText(movieReq.getMovieCode())) {
 			res.setMessage(MovieRtnCode.MOVIE_CODE_NOT_EXSIST.getMessage());

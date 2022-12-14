@@ -2,6 +2,7 @@ package com.example.demo_movie.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import com.example.demo_movie.service.ifs.MovieService;
 import com.example.demo_movie.vo.MovieReq;
 import com.example.demo_movie.vo.MovieRes;
 
+@CrossOrigin
 @RestController
 public class MovieController {
 
