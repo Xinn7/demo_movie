@@ -51,6 +51,9 @@ public class MovieReq {
 	@JsonProperty("type_or_movieName")
 	private String typeOrMovieName;
 	
+	@JsonProperty("customer_id")
+	private Integer customerId;
+	
 	public MovieReq() {
 		
 	}
@@ -174,6 +177,12 @@ public class MovieReq {
 	public void setTypeOrMovieName(String typeOrMovieName) {
 		this.typeOrMovieName = typeOrMovieName;
 	}
+	public Integer getCustomerId() {
+		return customerId;
+	}
 
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
 	
 }

@@ -7,7 +7,9 @@ import com.example.demo_movie.entity.Customers;
 import com.example.demo_movie.entity.Movie;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-@JsonInclude(JsonInclude.Include.NON_EMPTY)	
+
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+
 public class MovieRes {
 
 	private Movie movie;
@@ -19,6 +21,18 @@ public class MovieRes {
 	private List<Customers> orderList;
 	
 	private List<Movie> movieList;
+
+	private Integer customerId;
+
+	private String customerName;
+
+	private String buyMovieCode;
+
+	private Integer ticketQuantity;
+
+	private Integer totalPrice;
+
+	private boolean verify;
 
 	private MovieRes movieResList;
 	
@@ -112,6 +126,54 @@ public class MovieRes {
 		this.orderList = orderList;
 	}
 
+	public Integer getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public String getBuyMovieCode() {
+		return buyMovieCode;
+	}
+
+	public void setBuyMovieCode(String buyMovieCode) {
+		this.buyMovieCode = buyMovieCode;
+	}
+
+	public Integer getTicketQuantity() {
+		return ticketQuantity;
+	}
+
+	public void setTicketQuantity(Integer ticketQuantity) {
+		this.ticketQuantity = ticketQuantity;
+	}
+
+	public Integer getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Integer totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public boolean isVerify() {
+		return verify;
+	}
+
+	public void setVerify(boolean verify) {
+		this.verify = verify;
+	}
+
 	public List<Movie> getMovieList() {
 		return movieList;
 	}
@@ -183,7 +245,5 @@ public class MovieRes {
 	public void setTypeOrName(String typeOrName) {
 		this.typeOrName = typeOrName;
 	}
-
-	
 
 }

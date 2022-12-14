@@ -2,6 +2,7 @@ package com.example.demo_movie.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import com.example.demo_movie.service.ifs.MovieService;
 import com.example.demo_movie.vo.MovieReq;
 import com.example.demo_movie.vo.MovieRes;
 
+@CrossOrigin
 @RestController
 public class MovieController {
 
@@ -23,13 +25,24 @@ public class MovieController {
 				|| !StringUtils.hasText(movieReq.getDay()) || !StringUtils.hasText(movieReq.getType())) {
 			return new MovieRes(MovieRtnCode.PARAMS_ERROR.getMessage());
 		}
-
+		if (movieReq.getPrice() <= 0 ) {
+			return new MovieRes(MovieRtnCode.PARAMS_ERROR.getMessage());
+		}
 		return movieService.createMovieInfo(movieReq);
 	}
 
-	public MovieRes reviseMovieInfo(MovieReq movieReq) {
-		return null;
-		// TODO
+	@PostMapping(value = "/api/reviseMovieInfo")
+	public MovieRes reviseMovieInfo(@RequestBody MovieReq movieReq) {
+		if (!StringUtils.hasText(movieReq.getMovieCode()) || !StringUtils.hasText(movieReq.getMovieName())
+				|| !StringUtils.hasText(movieReq.getDay()) || !StringUtils.hasText(movieReq.getType())) {
+			return new MovieRes(MovieRtnCode.PARAMS_ERROR.getMessage());
+		}
+		if (movieReq.getPrice() <= 0 ) {
+			return new MovieRes(MovieRtnCode.PARAMS_ERROR.getMessage());
+		}
+		
+		
+		return movieService.reviseMovieInfo(movieReq);
 	}
 
 	@PostMapping(value = "/api/deleteMovieInfo")
@@ -89,20 +102,27 @@ public class MovieController {
 		
 		return movieRes;
 	}
-	
 
 	@PostMapping(value = "/api/createCustomerAndBuy")
 	public MovieRes createCustomerAndBuy(@RequestBody MovieReq movieReq) {
-		if (!StringUtils.hasText(movieReq.getCustomerName()) || !StringUtils.hasText(movieReq.getMovieCode())
-				|| movieReq.getTicketQuantity() <= 0) {
-			return new MovieRes(MovieRtnCode.PARAMS_ERROR.getMessage());
-		}
 		return movieService.createCustomerAndBuy(movieReq);
 	}
-	
+
+	@PostMapping(value = "/api/reviseCustomerAndBuy")
+	public MovieRes reviseCustomerAndBuy(@RequestBody MovieReq req) {
+		return movieService.reviseCustomerAndBuy(req);
+	}
+
+//	@Modifying 
+//	@Transactional
+	@PostMapping(value = "/api/deleteCustomerAndBuy")
+	public MovieRes deleteCustomerAndBuy(@RequestBody MovieReq req) {
+		return movieService.deleteCustomerAndBuy(req);
+	}
+
 	@PostMapping(value = "/api/findAllMovieByName")
 	public MovieRes findAllMovieByName(@RequestBody MovieReq movieReq) {
-		if (!StringUtils.hasText(movieReq.getCustomerName())){
+		if (!StringUtils.hasText(movieReq.getCustomerName())) {
 			return new MovieRes(MovieRtnCode.PARAMS_ERROR.getMessage());
 		}
 		return movieService.findAllMovieByName(movieReq);

@@ -13,6 +13,4 @@ public interface MovieDao extends JpaRepository<Movie, String> {
 	public List<Movie> findMovieByMovieName(String movieName);
 
 	public List<Movie> findMovieByType(String type);
-	
-	
 }

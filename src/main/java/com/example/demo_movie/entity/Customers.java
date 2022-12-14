@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-
+import org.hibernate.annotations.CreationTimestamp;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "customers")
@@ -24,6 +24,7 @@ public class Customers {
 	@Column(name = "customer_name")
 	private String customerName;
 
+	@CreationTimestamp
 	@Column(name = "order_date")
 	private LocalDateTime orderDate;
 
