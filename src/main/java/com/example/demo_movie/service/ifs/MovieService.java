@@ -27,4 +27,8 @@ public interface MovieService {
 	
 	public MovieRes findAllMovieByName(MovieReq movieReq);
 	
+	public MovieRes findByCustomerId(MovieReq movieReq);
+	
+	public void reviseStatus(MovieReq req);
+	
 }

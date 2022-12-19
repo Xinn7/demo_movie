@@ -8,7 +8,7 @@ import com.example.demo_movie.entity.Movie;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 
-@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 
 public class MovieRes {
 
@@ -32,8 +32,6 @@ public class MovieRes {
 
 	private Integer totalPrice;
 
-	private boolean verify;
-
 	private MovieRes movieResList;
 	
 	private String movieName;
@@ -50,6 +48,8 @@ public class MovieRes {
 	private int price;
 	
 	private String typeOrName;
+	
+	private String status;
 	
 	public MovieRes() {
 
@@ -166,14 +166,6 @@ public class MovieRes {
 		this.totalPrice = totalPrice;
 	}
 
-	public boolean isVerify() {
-		return verify;
-	}
-
-	public void setVerify(boolean verify) {
-		this.verify = verify;
-	}
-
 	public List<Movie> getMovieList() {
 		return movieList;
 	}
@@ -244,6 +236,14 @@ public class MovieRes {
 
 	public void setTypeOrName(String typeOrName) {
 		this.typeOrName = typeOrName;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

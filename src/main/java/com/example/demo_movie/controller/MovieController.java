@@ -1,10 +1,12 @@
 package com.example.demo_movie.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo_movie.constants.MovieRtnCode;
@@ -128,6 +130,15 @@ public class MovieController {
 		return movieService.findAllMovieByName(movieReq);
 	}
 	
+	@PostMapping(value = "/api/findByCustomerId")
+	public MovieRes findByCustomerId(@RequestBody MovieReq movieReq) {
+		return movieService.findByCustomerId(movieReq);
+	}
 	
+	@ResponseStatus(value = HttpStatus.NO_CONTENT)
+	@PostMapping(value = "/api/reviseVerify")
+	public void reviseVerify(@RequestBody MovieReq req) {
+		movieService.reviseStatus(req);
+	}
 	
 }

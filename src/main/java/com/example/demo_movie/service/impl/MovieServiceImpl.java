@@ -1,4 +1,5 @@
 package com.example.demo_movie.service.impl;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -53,7 +54,7 @@ public class MovieServiceImpl implements MovieService {
 				movieReq.getStartTime(), movieReq.getPrice(), movieReq.getType(), movieReq.getTotalTicket(),
 				movieReq.getTicketBalance());
 		movieDao.save(movie);
-		
+
 		return new MovieRes(movie, MovieRtnCode.SUCCESSFUL.getMessage());
 	}
 
@@ -94,7 +95,6 @@ public class MovieServiceImpl implements MovieService {
 //		return movieList;
 //	}
 
-	
 	@Override
 	public MovieRes findMovieByMovieNameOrType(String typeOrMovieName) {
 		List<MovieRes> movieResList = new ArrayList<>();
@@ -102,7 +102,7 @@ public class MovieServiceImpl implements MovieService {
 
 		if (!movieDao.findMovieByMovieName(typeOrMovieName).isEmpty()) {
 			List<Movie> movieNameList = movieDao.findMovieByMovieName(typeOrMovieName);
-			if(movieNameList.isEmpty()) {
+			if (movieNameList.isEmpty()) {
 				return null;
 			}
 			for (Movie movie : movieNameList) {
@@ -115,7 +115,7 @@ public class MovieServiceImpl implements MovieService {
 
 		} else if (!movieDao.findMovieByType(typeOrMovieName).isEmpty()) {
 			List<Movie> movieTypeList = movieDao.findMovieByType(typeOrMovieName);
-			if(movieTypeList.isEmpty()) {
+			if (movieTypeList.isEmpty()) {
 				return null;
 			}
 			for (Movie movie : movieTypeList) {
@@ -128,7 +128,7 @@ public class MovieServiceImpl implements MovieService {
 		}
 		return movieRes;
 	}
-	
+
 	@Override
 	public MovieRes createCustomerAndBuy(MovieReq movieReq) {
 		// 改善沒有輸入名字也可以買 TODO
@@ -144,9 +144,7 @@ public class MovieServiceImpl implements MovieService {
 		}
 		// §ó·s³Ñ¾l²¼¼Æ
 		Movie movie = movieOp.get();
-		movie.setTicketBalance(movie.getTicketBalance() - movieReq.getTicketQuantity());
-		// ÀË¬d³Ñ¾l²¼¼Æ
-		if (movie.getTicketBalance() == 0) {
+		if (movie.getTicketBalance() < 0) {
 			res.setMessage(MovieRtnCode.TICKET_SOLD_OUT.getMessage());
 			return res;
 		}
@@ -154,6 +152,9 @@ public class MovieServiceImpl implements MovieService {
 			res.setMessage(MovieRtnCode.TICKET_NOT_ENOUGH.getMessage());
 			return res;
 		}
+		movie.setTicketBalance(movie.getTicketBalance() - movieReq.getTicketQuantity());
+		// ÀË¬d³Ñ¾l²¼¼Æ
+
 		movieDao.save(movie);
 		// ¦s¶iDB
 		Customers customer = new Customers();
@@ -161,6 +162,7 @@ public class MovieServiceImpl implements MovieService {
 		customer.setMovieCode(movieReq.getMovieCode());
 		customer.setTicketQuantity(movieReq.getTicketQuantity());
 		customer.setTotalPrice(movie.getPrice() * movieReq.getTicketQuantity());
+		customer.setStatus("unpaid");
 		customersDao.save(customer);
 		// ©¹res³]­È
 		res.setCustomerId(customer.getId());
@@ -168,7 +170,7 @@ public class MovieServiceImpl implements MovieService {
 		res.setBuyMovieCode(customer.getMovieCode());
 		res.setTicketQuantity(customer.getTicketQuantity());
 		res.setTotalPrice(customer.getTotalPrice());
-		res.setVerify(false);
+		res.setStatus(customer.getStatus());
 		res.setMessage(MovieRtnCode.SUCCESSFUL.getMessage());
 		return res;
 	}
@@ -228,6 +230,9 @@ public class MovieServiceImpl implements MovieService {
 		Optional<Movie> movieOp = movieDao.findById(customer.getMovieCode());
 		Movie movie = movieOp.get();
 		movie.setTotalTicket(movie.getTotalTicket() + customer.getTicketQuantity());
+		
+		String name = customer.getCustomerName();
+		res.setCustomerName(name);
 		return res;
 	}
 
@@ -242,5 +247,26 @@ public class MovieServiceImpl implements MovieService {
 		return new MovieRes(customerOrderList, MovieRtnCode.SUCCESSFUL.getMessage());
 	}
 
+	@Override
+	public MovieRes findByCustomerId(MovieReq movieReq) {
+		Optional<Customers> customerOp = customersDao.findById(movieReq.getCustomerId());
+		if (!customerOp.isPresent()) {
+			return new MovieRes(MovieRtnCode.CUSTOMERID_NOT_EXSIST.getMessage());
+		}
+		return new MovieRes(customerOp.get(), MovieRtnCode.SUCCESSFUL.getMessage());
+	}
+
+	@Override
+	public void reviseStatus(MovieReq req) {
+		Optional<Customers> customerOp = customersDao.findById(req.getCustomerId());
+		Customers customer = customerOp.get();
+		
+		if(customer.getStatus().equalsIgnoreCase("expired")) {
+			return;
+		}
+		
+		customer.setStatus("paid");
+		customersDao.save(customer);
+	}
 
 }

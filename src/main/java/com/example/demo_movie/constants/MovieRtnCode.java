@@ -15,7 +15,8 @@ public enum MovieRtnCode {
 	CUSTOMERID_NOT_EXSIST("400" ,"顧客代碼不存在"),
 	MOVIE_EMPTY("400", "要查詢的電影名稱不能是空的"),
 	TYPE_EMPTY("400", "要查詢的電影類型不能是空的"),
-	TYPE_EXIST("400","查詢的電影類型不存在!!");
+	TYPE_EXIST("400","查詢的電影類型不存在!!"),
+	OVERTIME("400", "付款失敗，驗證已逾時");
 
 
 	private String code;

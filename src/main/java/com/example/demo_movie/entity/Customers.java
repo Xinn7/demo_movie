@@ -37,8 +37,8 @@ public class Customers {
 	@Column(name = "total_price")
 	private int totalPrice;
 
-	@Column(name = "verify")
-	private boolean verify;
+	@Column(name = "status")
+	private String status;
 
 	public Customers(String customerName, String movieCode, int ticketQuantity) {
 		this.customerName = customerName;
@@ -98,12 +98,11 @@ public class Customers {
 		this.totalPrice = totalPrice;
 	}
 
-	public boolean isVerify() {
-		return verify;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setVerify(boolean verify) {
-		this.verify = verify;
+	public void setStatus(String status) {
+		this.status = status;
 	}
-
 }
