@@ -19,16 +19,22 @@ public interface MovieService {
 	//findMovieByMovieName 和 findMovieByType 的二合一搜尋
 	public MovieRes findMovieByMovieNameOrType(String typeOrMovieName);
 	
+	//買票
 	public MovieRes createCustomerAndBuy(MovieReq movieReq);
 	
+	//修改
 	public MovieRes reviseCustomerAndBuy(MovieReq movieReq);
 	
+	//刪除
 	public MovieRes deleteCustomerAndBuy(MovieReq movieReq);
 	
+	//依客戶名稱查詢訂單
 	public MovieRes findAllMovieByName(MovieReq movieReq);
 	
+	//依客戶訂單代碼查詢訂單
 	public MovieRes findByCustomerId(MovieReq movieReq);
 	
+	//改變驗證狀態
 	public void reviseStatus(MovieReq req);
 	
 }

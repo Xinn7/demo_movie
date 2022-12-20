@@ -135,7 +135,7 @@ public class MovieController {
 		return movieService.findByCustomerId(movieReq);
 	}
 	
-	@ResponseStatus(value = HttpStatus.NO_CONTENT)
+	@ResponseStatus(value = HttpStatus.NO_CONTENT) //指定HttpStatus返回204狀態，NO_CONTENT為無內容的Response
 	@PostMapping(value = "/api/reviseVerify")
 	public void reviseVerify(@RequestBody MovieReq req) {
 		movieService.reviseStatus(req);

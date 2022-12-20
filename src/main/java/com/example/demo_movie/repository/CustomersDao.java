@@ -19,5 +19,6 @@ public interface CustomersDao extends JpaRepository<Customers, Integer>{
 	@Transactional
 	@Modifying
 	@Query("update Customers set status = 'expired' where order_date < :time and status = 'unpaid'")
+	//int回傳成功更新的筆數
 	int updateStatus(@Param(value = "time") String time);
 }
