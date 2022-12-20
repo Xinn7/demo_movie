@@ -137,12 +137,17 @@ public class MovieServiceImpl implements MovieService {
 			res.setMessage(MovieRtnCode.MOVIE_CODE_NOT_EXSIST.getMessage());
 			return res;
 		}
+		
+		if(movieReq.getTicketQuantity() <= 0) {
+			res.setMessage(MovieRtnCode.TICKET_QUANTITY_IS_EMPTY.getMessage());
+			return res;
+		}
 		Optional<Movie> movieOp = movieDao.findById(movieReq.getMovieCode());
 		if (movieOp.isEmpty()) {
 			res.setMessage(MovieRtnCode.MOVIE_CODE_NOT_EXSIST.getMessage());
 			return res;
 		}
-		// §ó·s³Ñ¾l²¼¼Æ
+		
 		Movie movie = movieOp.get();
 		if (movie.getTicketBalance() < 0) {
 			res.setMessage(MovieRtnCode.TICKET_SOLD_OUT.getMessage());
@@ -153,10 +158,10 @@ public class MovieServiceImpl implements MovieService {
 			return res;
 		}
 		movie.setTicketBalance(movie.getTicketBalance() - movieReq.getTicketQuantity());
-		// ÀË¬d³Ñ¾l²¼¼Æ
+		
 
 		movieDao.save(movie);
-		// ¦s¶iDB
+		
 		Customers customer = new Customers();
 		customer.setCustomerName(movieReq.getCustomerName());
 		customer.setMovieCode(movieReq.getMovieCode());
@@ -164,7 +169,7 @@ public class MovieServiceImpl implements MovieService {
 		customer.setTotalPrice(movie.getPrice() * movieReq.getTicketQuantity());
 		customer.setStatus("unpaid");
 		customersDao.save(customer);
-		// ©¹res³]­È
+		
 		res.setCustomerId(customer.getId());
 		res.setCustomerName(customer.getCustomerName());
 		res.setBuyMovieCode(customer.getMovieCode());

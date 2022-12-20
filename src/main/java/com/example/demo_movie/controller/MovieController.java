@@ -96,7 +96,7 @@ public class MovieController {
 		}
 		
 		MovieRes movieList = movieService.findMovieByMovieNameOrType(req.getTypeOrMovieName());
-		if(movieList == null) {
+		if(movieList.getMovieCode() == null) {
 			return new MovieRes(MovieRtnCode.TYPE_EXIST.getMessage());
 		}
 		
@@ -135,6 +135,7 @@ public class MovieController {
 		return movieService.findByCustomerId(movieReq);
 	}
 	
+	//此請求沒有要發送的內容，但標頭可能會有用。用戶代理可能會使用新的資源更新其緩存的標頭。
 	@ResponseStatus(value = HttpStatus.NO_CONTENT) //指定HttpStatus返回204狀態，NO_CONTENT為無內容的Response
 	@PostMapping(value = "/api/reviseVerify")
 	public void reviseVerify(@RequestBody MovieReq req) {

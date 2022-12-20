@@ -8,6 +8,7 @@ public enum MovieRtnCode {
 	MOVIE_NOT_EXISTS("400", "電影不存在"),
 	CUSTOMER_IS_EXISTS("400", "帳號已存在"),
 	TICKET_QUANTITY_ERROR("400", "席位不足"),
+	TICKET_QUANTITY_IS_EMPTY("400", "票數不得為空"),
 	ORDER_LIST_IS_EMPTY("400", "查無訂單資料"),
 	MOVIE_CODE_NOT_EXSIST("400", "電影代碼不存在"),
 	TICKET_SOLD_OUT("400", "票已售完"),
